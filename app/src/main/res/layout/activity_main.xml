@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Basic budget calculator"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="16dp"/>
+
+        <EditText
+                android:id="@+id/editTextIncome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Weekly Income"
+                android:inputType="number"/>
+
+        <EditText
+                android:id="@+id/editTextMortgageRent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Mortgage/Rent"
+                android:inputType="number"
+                android:layout_marginTop="10dp"/>
+
+        <EditText
+                android:id="@+id/editTextPower"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Power"
+                android:inputType="number"
+                android:layout_marginTop="10dp"/>
+
+        <EditText
+                android:id="@+id/editTextCar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Car expenses"
+                android:inputType="number"
+                android:layout_marginTop="10dp"/>
+
+        <EditText
+                android:id="@+id/editTextFood"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Food"
+                android:inputType="number"
+                android:layout_marginTop="10dp"/>
+
+        <Button
+                android:id="@+id/buttonSubmit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Submit"
+                android:layout_marginTop="20dp"/>
+
+        <TextView
+                android:id="@+id/textViewResult"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginTop="20dp"/>
+
+    </LinearLayout>
+
+</ScrollView>
