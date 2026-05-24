@@ -14,6 +14,7 @@ class MainActivity : ComponentActivity() {
     private lateinit var power: EditText
     private lateinit var car: EditText
     private lateinit var food: EditText
+    private lateinit var other: EditText
     private lateinit var submitButton: Button
     private lateinit var resultTextView: TextView
 
@@ -28,6 +29,7 @@ class MainActivity : ComponentActivity() {
         power = findViewById(R.id.editTextPower)
         car = findViewById(R.id.editTextCar)
         food = findViewById(R.id.editTextFood)
+        other = findViewById(R.id.editTextOther)
         submitButton = findViewById(R.id.buttonSubmit)
         resultTextView = findViewById(R.id.textViewResult)
 
