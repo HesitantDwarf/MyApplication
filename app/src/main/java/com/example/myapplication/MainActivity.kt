@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.enableEdgeToEdge
@@ -16,7 +17,6 @@ class MainActivity : ComponentActivity() {
     private lateinit var food: EditText
     private lateinit var other: EditText
     private lateinit var submitButton: Button
-    private lateinit var resultTextView: TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,15 +31,13 @@ class MainActivity : ComponentActivity() {
         food = findViewById(R.id.editTextFood)
         other = findViewById(R.id.editTextOther)
         submitButton = findViewById(R.id.buttonSubmit)
-        resultTextView = findViewById(R.id.textViewResult)
 
         submitButton.setOnClickListener {
-
-            val income: Int = income.text.toString().toInt()
-            val mortgageRent: Int = mortgageRent.text.toString().toInt()
-            val power: Int = power.text.toString().toInt()
-            val car: Int = car.text.toString().toInt()
-            val food: Int = food.text.toString().toInt()
+            val income: Int = if(income.text.toString().isEmpty()) 0 else income.text.toString().toInt()
+            val mortgageRent: Int = if(mortgageRent.text.toString().isEmpty()) 0 else mortgageRent.text.toString().toInt()
+            val power: Int = if(power.text.toString().isEmpty()) 0 else power.text.toString().toInt()
+            val car: Int = if(car.text.toString().isEmpty()) 0 else car.text.toString().toInt()
+            val food: Int = if(food.text.toString().isEmpty()) 0 else food.text.toString().toInt()
 
             val expenses: Int = mortgageRent + power + car + food
             val netIncome: Int = income - expenses
@@ -53,12 +51,15 @@ class MainActivity : ComponentActivity() {
             """.trimIndent()
 
             if(netIncome > 0) {
-                result = result + "\n\nGood job your making money.".trimIndent()
+                result + "\n\nGood job your making money.".trimIndent()
             } else {
-                result = result + "\n\nOhh no, you spend more than you make.".trimIndent()
+                result + "\n\nOhh no, you spend more than you make.".trimIndent()
             }
 
-            resultTextView.text = result
+            val intent = Intent(this, BudgetResultsActivity::class.java).apply {
+                putExtra("RESULT", result)
+            }
+            startActivity(intent)
         }
     }
 }
