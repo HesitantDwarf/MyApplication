@@ -33,16 +33,17 @@ class MainActivity : ComponentActivity() {
         submitButton = findViewById(R.id.buttonSubmit)
 
         submitButton.setOnClickListener {
-            val income: Int = if(income.text.toString().isEmpty()) 0 else income.text.toString().toInt()
-            val mortgageRent: Int = if(mortgageRent.text.toString().isEmpty()) 0 else mortgageRent.text.toString().toInt()
-            val power: Int = if(power.text.toString().isEmpty()) 0 else power.text.toString().toInt()
-            val car: Int = if(car.text.toString().isEmpty()) 0 else car.text.toString().toInt()
-            val food: Int = if(food.text.toString().isEmpty()) 0 else food.text.toString().toInt()
+            val income: Float = if(income.text.toString().isEmpty()) 0f else income.text.toString().toFloat()
+            val mortgageRent: Float = if(mortgageRent.text.toString().isEmpty()) 0f else mortgageRent.text.toString().toFloat()
+            val power: Float = if(power.text.toString().isEmpty()) 0f else power.text.toString().toFloat()
+            val car: Float = if(car.text.toString().isEmpty()) 0f else car.text.toString().toFloat()
+            val food: Float = if(food.text.toString().isEmpty()) 0f else food.text.toString().toFloat()
+            val other: Float = if(other.text.toString().isEmpty()) 0f else other.text.toString().toFloat()
 
-            val expenses: Int = mortgageRent + power + car + food
-            val netIncome: Int = income - expenses
+            val expenses: Float = mortgageRent + power + car + food + other
+            val netIncome: Float = income - expenses
 
-            var result = """
+            val result = """
                 Income: $income
                 
                 Total expenses: $expenses
@@ -57,6 +58,12 @@ class MainActivity : ComponentActivity() {
             }
 
             val intent = Intent(this, BudgetResultsActivity::class.java).apply {
+                putExtra("INCOME", income)
+                putExtra("MORTGAGE", mortgageRent)
+                putExtra("POWER", power)
+                putExtra("CAR", car)
+                putExtra("FOOD", food)
+                putExtra("OTHER", other)
                 putExtra("RESULT", result)
             }
             startActivity(intent)
