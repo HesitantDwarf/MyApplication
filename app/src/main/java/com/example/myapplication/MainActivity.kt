@@ -33,12 +33,13 @@ class MainActivity : ComponentActivity() {
         submitButton = findViewById(R.id.buttonSubmit)
 
         submitButton.setOnClickListener {
-            val income: Float = if(income.text.toString().isEmpty()) 0f else income.text.toString().toFloat()
-            val mortgageRent: Float = if(mortgageRent.text.toString().isEmpty()) 0f else mortgageRent.text.toString().toFloat()
-            val power: Float = if(power.text.toString().isEmpty()) 0f else power.text.toString().toFloat()
-            val car: Float = if(car.text.toString().isEmpty()) 0f else car.text.toString().toFloat()
-            val food: Float = if(food.text.toString().isEmpty()) 0f else food.text.toString().toFloat()
-            val other: Float = if(other.text.toString().isEmpty()) 0f else other.text.toString().toFloat()
+            //Fix default values
+            val income: Float = if(income.text.toString().isEmpty()) 1000f else income.text.toString().toFloat()
+            val mortgageRent: Float = if(mortgageRent.text.toString().isEmpty()) 200f else mortgageRent.text.toString().toFloat()
+            val power: Float = if(power.text.toString().isEmpty()) 50f else power.text.toString().toFloat()
+            val car: Float = if(car.text.toString().isEmpty()) 50f else car.text.toString().toFloat()
+            val food: Float = if(food.text.toString().isEmpty()) 100f else food.text.toString().toFloat()
+            val other: Float = if(other.text.toString().isEmpty()) 50f else other.text.toString().toFloat()
 
             val expenses: Float = mortgageRent + power + car + food + other
             val netIncome: Float = income - expenses
@@ -64,6 +65,7 @@ class MainActivity : ComponentActivity() {
                 putExtra("CAR", car)
                 putExtra("FOOD", food)
                 putExtra("OTHER", other)
+                putExtra("EXPENSES", expenses)
                 putExtra("RESULT", result)
             }
             startActivity(intent)

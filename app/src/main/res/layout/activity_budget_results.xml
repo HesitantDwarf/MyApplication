@@ -9,12 +9,11 @@
             android:layout_height="wrap_content"
             android:padding="16dp">
 
-
         <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/pieChart"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-        />
+                android:layout_height="400dp"
+                android:layout_marginTop="16dp"/>
 
         <TextView
                 android:id="@+id/textViewResult"
