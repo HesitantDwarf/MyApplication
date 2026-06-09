@@ -16,7 +16,7 @@ import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.utils.MPPointF
 
-class BudgetResultsActivity : ComponentActivity() {
+class ResultsActivity : ComponentActivity() {
 
     private lateinit var resultTextView: TextView
     private lateinit var pieChart: PieChart
@@ -25,7 +25,7 @@ class BudgetResultsActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_budget_results)
+        setContentView(R.layout.results_activity)
 
         resultTextView = findViewById(R.id.textViewResult)
         pieChart = findViewById(R.id.pieChart)
@@ -34,10 +34,6 @@ class BudgetResultsActivity : ComponentActivity() {
         val income: Float = intent.getFloatExtra("INCOME", 0f)
         val expenses: Float = intent.getFloatExtra("EXPENSES", 0f)
         val mortgage: Float = intent.getFloatExtra("MORTGAGE", 0f)
-        val power: Float = intent.getFloatExtra("POWER", 0f)
-        val car: Float = intent.getFloatExtra("CAR", 0f)
-        val food: Float = intent.getFloatExtra("FOOD", 0f)
-        val other: Float = intent.getFloatExtra("OTHER", 0f)
 
         pieChart.description.isEnabled = false
         pieChart.isRotationEnabled = false
@@ -58,10 +54,6 @@ class BudgetResultsActivity : ComponentActivity() {
 
         val entries: ArrayList<PieEntry> = ArrayList()
         if(mortgage>0f) entries.add(PieEntry(mortgage, "Mortgage/Rent"))
-        if(power>0f) entries.add(PieEntry(power, "Power"))
-        if(car>0f) entries.add(PieEntry(car, "Car"))
-        if(food>0f) entries.add(PieEntry(food, "Food"))
-        if(other>0f) entries.add(PieEntry(other, "Other"))
         val dataSet = PieDataSet(entries, "")
 
         dataSet.setDrawIcons(false)

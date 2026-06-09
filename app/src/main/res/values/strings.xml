@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="spinner_title">Categories</string>
+    <string-array name="Categories">
+        <item>Mortgage</item>
+        <item>Rent</item>
+        <item>Rates</item>
+        <item>Utilities</item>
+        <item>Food</item>
+        <item>Transport</item>
+        <item>Insurance</item>
+        <item>Childcare</item>
+        <item>Debt obligations</item>
+        <item>Car payments</item>
+        <item>Phone</item>
+        <item>Medical care</item>
+        <item>Pets</item>
+        <item>Supplies</item>
+        <item>Other</item>
+    </string-array>
 </resources>

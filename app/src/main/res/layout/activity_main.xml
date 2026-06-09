@@ -15,52 +15,21 @@
                 android:text="Basic budget calculator"
                 android:textSize="24sp"
                 android:textStyle="bold"
+                android:layout_marginTop="24dp"
                 android:layout_marginBottom="16dp"/>
 
         <EditText
-                android:id="@+id/editTextIncome"
+                android:id="@+id/income"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Weekly Income"
                 android:inputType="number"/>
 
         <EditText
-                android:id="@+id/editTextMortgageRent"
+                android:id="@+id/expense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Mortgage/Rent"
-                android:inputType="number"
-                android:layout_marginTop="10dp"/>
-
-        <EditText
-                android:id="@+id/editTextPower"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Power"
-                android:inputType="number"
-                android:layout_marginTop="10dp"/>
-
-        <EditText
-                android:id="@+id/editTextCar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Car expenses"
-                android:inputType="number"
-                android:layout_marginTop="10dp"/>
-
-        <EditText
-                android:id="@+id/editTextFood"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Food"
-                android:inputType="number"
-                android:layout_marginTop="10dp"/>
-
-        <EditText
-                android:id="@+id/editTextOther"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Other"
                 android:inputType="number"
                 android:layout_marginTop="10dp"/>
 
@@ -70,6 +39,25 @@
                 android:layout_height="wrap_content"
                 android:text="Submit"
                 android:layout_marginTop="20dp"/>
+
+        <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dropdown"
+                android:prompt="@string/spinner_title"
+                android:id="@+id/spinner"/>
+
+        <Button
+                android:text="Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/button"/>
+
+        <TextView
+                android:text=""
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView"/>
 
     </LinearLayout>
 
