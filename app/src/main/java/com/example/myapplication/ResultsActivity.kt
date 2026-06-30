@@ -31,9 +31,27 @@ class ResultsActivity : ComponentActivity() {
         pieChart = findViewById(R.id.pieChart)
         goBackButton = findViewById(R.id.goBack)
 
-        val income: Float = intent.getFloatExtra("INCOME", 0f)
-        val expenses: Float = intent.getFloatExtra("EXPENSES", 0f)
-        val mortgage: Float = intent.getFloatExtra("MORTGAGE", 0f)
+        val mortgage: Float = intent.getFloatExtra("MORTGAGE", 400f)
+
+        @Suppress("UNCHECKED_CAST")
+        val incomesMap: HashMap<String, Int> = intent.getSerializableExtra("INCOMES") as HashMap<String, Int>
+        val incomes = incomesMap.toList().sortedByDescending { it.second }.toMap()
+        @Suppress("UNCHECKED_CAST")
+        val expensesMap: HashMap<String, Int> = intent.getSerializableExtra("EXPENSES") as HashMap<String, Int>
+        val expenses = expensesMap.toList().sortedByDescending { it.second }.toMap()
+
+        var totalIncome = 0f
+        for ((category, income) in incomes) {
+            totalIncome += income
+        }
+
+        val entries: ArrayList<PieEntry> = ArrayList()
+        var totalExpenses = 0f
+        for ((category, expense) in expenses) {
+            totalExpenses += expense
+            if(expense > 0) entries.add(PieEntry(expense.toFloat(), category))
+        }
+        val dataSet = PieDataSet(entries, "")
 
         pieChart.description.isEnabled = false
         pieChart.isRotationEnabled = false
@@ -45,16 +63,12 @@ class ResultsActivity : ComponentActivity() {
         pieChart.setCenterTextColor(R.color.black)
         pieChart.setCenterTextSize(24f)
         pieChart.setCenterTextTypeface(Typeface.DEFAULT_BOLD)
-        pieChart.centerText = "$" + intent.getFloatExtra("INCOME", 0f).toString()
+        pieChart.centerText = "$$totalIncome"
         pieChart.rotationAngle - 270f
-        pieChart.maxAngle = if(expenses>income) 360f else if(expenses/income < 0.25f) 90f else (expenses/income)*360f
+        pieChart.maxAngle = if(totalExpenses>totalIncome) 360f else if(totalExpenses/totalIncome < 0.25f) 90f else (totalExpenses/totalIncome)*360f
         pieChart.isHighlightPerTapEnabled = true
         pieChart.animateY(2000, Easing.EaseInOutQuad)
         pieChart.setDrawEntryLabels(false)
-
-        val entries: ArrayList<PieEntry> = ArrayList()
-        if(mortgage>0f) entries.add(PieEntry(mortgage, "Mortgage/Rent"))
-        val dataSet = PieDataSet(entries, "")
 
         dataSet.setDrawIcons(false)
         dataSet.sliceSpace = 3f
@@ -64,9 +78,14 @@ class ResultsActivity : ComponentActivity() {
         val colours: ArrayList<Int> = ArrayList()
         colours.add(resources.getColor(R.color.purple_200))
         colours.add(resources.getColor(R.color.red))
+        colours.add(resources.getColor(R.color.darkBlue))
         colours.add(resources.getColor(R.color.orange))
         colours.add(resources.getColor(R.color.teal_700))
         colours.add(resources.getColor(R.color.yellow))
+        colours.add(resources.getColor(R.color.green))
+        colours.add(resources.getColor(R.color.lightBlue))
+        colours.add(resources.getColor(R.color.pink))
+        colours.add(resources.getColor(R.color.blue))
         colours.subList(0, entries.size)
         dataSet.colors = colours
 
@@ -87,7 +106,17 @@ class ResultsActivity : ComponentActivity() {
         legend.setDrawInside(false)
 
         pieChart.invalidate()
-        resultTextView.text = intent.getStringExtra("RESULT")
+
+        var text = "Income:\n"
+        for ((category, value) in incomes) {
+            text += "$category: $value\n"
+        }
+        text += "\nExpenses:\n"
+        for ((category, value) in expenses) {
+            text += "$category: $value\n"
+        }
+
+        resultTextView.text = text
 
         goBackButton.setOnClickListener {
             finish()

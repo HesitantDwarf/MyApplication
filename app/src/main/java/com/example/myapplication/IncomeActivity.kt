@@ -8,50 +8,46 @@ import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.activity.enableEdgeToEdge
 
-class ExpensesActivity : ComponentActivity() {
+class IncomeActivity : ComponentActivity() {
 
     private lateinit var button: Button
     private lateinit var submitButton: Button
     private lateinit var textView: TextView
-    private lateinit var expenseCat: EditText
-    private lateinit var expenseVal: EditText
+    private lateinit var incomeCat: EditText
+    private lateinit var incomeVal: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.expenses_activity)
+        setContentView(R.layout.activity_income)
 
-        @Suppress("UNCHECKED_CAST")
-        val incomes: HashMap<String, Int> = intent.getSerializableExtra("INCOMES") as HashMap<String, Int>
         val categoryMap = HashMap<String, Int>(10)
         var text = ""
-
-        textView = findViewById(R.id.textView)
-        expenseCat = findViewById(R.id.expenseCat)
-        expenseVal = findViewById(R.id.expenseVal)
         button = findViewById(R.id.existBudgetButton)
         submitButton = findViewById(R.id.newBudgetButton)
+        textView = findViewById(R.id.textView)
+        incomeCat = findViewById(R.id.incomeCat)
+        incomeVal = findViewById(R.id.incomeVal)
 
         button.setOnClickListener {
-            val expenseCatString = expenseCat.text.toString()
-            val expenseValString = expenseVal.text.toString()
-            if (expenseCat.text.isNotEmpty() and expenseVal.text.isNotEmpty()) {
+            val incomeCatString = incomeCat.text.toString()
+            val incomeValString = incomeVal.text.toString()
+            if (incomeCat.text.isNotEmpty() and incomeVal.text.isNotEmpty()) {
                 if (categoryMap.size < 10) {
-                    if (expenseCatString !in categoryMap) {
-                        text += "$expenseCatString = $expenseValString\n"
-                        categoryMap[expenseCatString] = expenseValString.toInt()
+                    if (incomeCatString !in categoryMap) {
+                        text += "$incomeCatString = $incomeValString\n"
+                        categoryMap[incomeCatString] = incomeValString.toInt()
                         textView.text = text
                     } else textView.text = "Category already exists."
                 } else textView.text = "Categories full."
             } else textView.text = "Please enter a category."
-            expenseCat.setText("")
-            expenseVal.setText("")
+            incomeCat.setText("")
+            incomeVal.setText("")
         }
 
         submitButton.setOnClickListener {
-            val intent = Intent(this, ResultsActivity::class.java).apply {
-                putExtra("INCOMES", incomes)
-                putExtra("EXPENSES", categoryMap)
+            val intent = Intent(this, ExpensesActivity::class.java).apply {
+                putExtra("INCOMES", categoryMap)
             }
             startActivity(intent)
         }
